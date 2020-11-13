@@ -7,11 +7,10 @@ class Transaction {
   final double amount;
   final DateTime time;
 
-  Transaction({
-      @required this.id,
+  Transaction(
+      {@required this.id,
       @required this.title,
-      @required this.desc, 
+      @required this.desc,
       @required this.amount,
-      @required this.time
-    })
+      @required this.time});
 }
