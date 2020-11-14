@@ -6,6 +6,11 @@ class TxNew extends StatelessWidget {
   final descController = TextEditingController();
   final amountController = TextEditingController();
 
+  // Function pointer from TxHistoryManager
+  final Function addTx;
+
+  TxNew(this.addTx); // constructor that called from TxHistorymanager
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,12 +22,28 @@ class TxNew extends StatelessWidget {
             children: [
               TextField(
                 decoration: InputDecoration(labelText: 'Title'),
+                controller: titleController,
               ),
               TextField(
                 decoration: InputDecoration(labelText: 'Descriptions'),
+                controller: descController,
               ),
               TextField(
                 decoration: InputDecoration(labelText: 'Amount'),
+                controller: amountController,
+              ),
+              FlatButton(
+                onPressed: () {
+                  addTx(
+                    titleController.text,
+                    descController.text,
+                    double.parse(amountController.text),
+                  );
+                },
+                child: Text(
+                  'Add new',
+                  style: TextStyle(color: Colors.red),
+                ),
               )
             ],
           ),

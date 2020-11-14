@@ -27,7 +27,7 @@ class HomePage extends StatelessWidget {
         ),
         body: Column(
           children: <Widget>[
-            TxChart(),
+            //TxChart(),
             TxHistoryManager(), // Manager to maintain History widget
           ],
         ));
