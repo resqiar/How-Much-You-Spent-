@@ -24,6 +24,11 @@ class HomePage extends StatelessWidget {
         appBar: AppBar(
           title: Text('Summary'),
           elevation: 4,
+          actions: [IconButton(icon: Icon(Icons.more_vert), onPressed: () {})],
+        ),
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: () {},
         ),
         body: SingleChildScrollView(
           child: Column(
