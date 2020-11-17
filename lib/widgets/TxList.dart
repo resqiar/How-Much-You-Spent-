@@ -10,10 +10,10 @@ class TxList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: MediaQuery.of(context).size.height / 2,
       width: double.infinity,
-      margin: EdgeInsets.all(8),
-      child: Column(
-        children: transactions.map((tx) {
+      child: ListView.builder(
+        itemBuilder: (context, index) {
           return Card(
             elevation: 4,
             // card
@@ -24,7 +24,7 @@ class TxList extends StatelessWidget {
                   Container(
                     margin: EdgeInsets.all(12),
                     child: Text(
-                      '\$${tx.amount.toString()}',
+                      '\$${transactions[index].amount.toStringAsFixed(2)}',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -38,7 +38,7 @@ class TxList extends StatelessWidget {
                     children: [
                       Container(
                         child: Text(
-                          tx.title,
+                          transactions[index].title,
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
@@ -47,7 +47,7 @@ class TxList extends StatelessWidget {
                       ),
                       Container(
                         child: Text(
-                          tx.desc,
+                          transactions[index].desc,
                           style: TextStyle(
                             fontSize: 12,
                           ),
@@ -56,7 +56,7 @@ class TxList extends StatelessWidget {
                       Container(
                         padding: EdgeInsets.symmetric(vertical: 2),
                         child: Text(
-                          DateFormat().format(tx.time),
+                          DateFormat().format(transactions[index].time),
                           style: TextStyle(
                             fontSize: 10,
                             color: Colors.grey,
@@ -69,7 +69,8 @@ class TxList extends StatelessWidget {
               ),
             ),
           );
-        }).toList(),
+        },
+        itemCount: transactions.length,
       ),
     );
   }

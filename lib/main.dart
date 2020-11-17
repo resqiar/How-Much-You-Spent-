@@ -25,11 +25,13 @@ class HomePage extends StatelessWidget {
           title: Text('Summary'),
           elevation: 4,
         ),
-        body: Column(
-          children: <Widget>[
-            //TxChart(),
-            TxHistoryManager(), // Manager to maintain History widget
-          ],
+        body: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              TxChart(),
+              TxHistoryManager(), // Manager to maintain History widget
+            ],
+          ),
         ));
   }
 }
