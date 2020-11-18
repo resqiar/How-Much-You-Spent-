@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 
-class TxNew extends StatelessWidget {
+class TxNew extends StatefulWidget {
   // hold a given data
-  final titleController = TextEditingController();
-  final descController = TextEditingController();
-  final amountController = TextEditingController();
-
-  // Function pointer from TxHistoryManager
   final Function addTx;
 
-  TxNew(this.addTx); // constructor that called from TxHistorymanager
+  TxNew(this.addTx);
+  @override
+  _TxNewState createState() => _TxNewState();
+}
 
-  // Function to handle input
+class _TxNewState extends State<TxNew> {
+  final titleController = TextEditingController();
+
+  final descController = TextEditingController();
+
+  final amountController = TextEditingController();
+
   void inputTx() {
     final titleInput = titleController.text;
     final descInput = descController.text;
@@ -19,7 +23,10 @@ class TxNew extends StatelessWidget {
 
     if (titleInput.isEmpty || descInput.isEmpty || amountInput <= 0) return;
 
-    addTx(titleInput, descInput, amountInput);
+    widget.addTx(titleInput, descInput, amountInput);
+
+    // close automatically after user input the data
+    Navigator.of(context).pop();
   }
 
   @override
