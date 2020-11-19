@@ -88,6 +88,15 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  // RECENT TX GETTER
+  List<Transaction> get _recentTxGetter {
+    return _txHistory.where((tx) {
+      return tx.time.isAfter(DateTime.now().subtract(
+        Duration(days: 7),
+      ));
+    }).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,7 +113,7 @@ class _HomePageState extends State<HomePage> {
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              TxChart(),
+              TxChart(_recentTxGetter),
               TxList(_txHistory), // Manager to maintain History widget
             ],
           ),
