@@ -12,66 +12,82 @@ class TxList extends StatelessWidget {
     return Container(
       height: MediaQuery.of(context).size.height / 2,
       width: double.infinity,
-      child: ListView.builder(
-        itemBuilder: (context, index) {
-          return Card(
-            elevation: 4,
-            // card
-            child: Container(
-              padding: EdgeInsets.all(8),
-              child: Row(
-                children: [
-                  Container(
-                    margin: EdgeInsets.all(12),
-                    child: Text(
-                      '\$${transactions[index].amount.toStringAsFixed(2)}',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors
-                            .red, // this color will change later dynamically
-                      ),
+      child: transactions.isEmpty
+          ? Column(
+              children: [
+                Container(
+                  height: MediaQuery.of(context).size.height / 2.5,
+                  child: Image.asset(
+                    'assets/images/3298067.jpg',
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                Text(
+                  'Oops, history not found!',
+                  style: TextStyle(fontSize: 18),
+                ),
+              ],
+            )
+          : ListView.builder(
+              itemBuilder: (context, index) {
+                return Card(
+                  elevation: 4,
+                  // card
+                  child: Container(
+                    padding: EdgeInsets.all(8),
+                    child: Row(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.all(12),
+                          child: Text(
+                            '\$${transactions[index].amount.toStringAsFixed(2)}',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context)
+                                  .primaryColor, // this color will change later dynamically
+                            ),
+                          ),
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              child: Text(
+                                transactions[index].title,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              child: Text(
+                                transactions[index].desc,
+                                style: TextStyle(
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.symmetric(vertical: 2),
+                              child: Text(
+                                DateFormat().format(transactions[index].time),
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            )
+                          ],
+                        )
+                      ],
                     ),
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        child: Text(
-                          transactions[index].title,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        child: Text(
-                          transactions[index].desc,
-                          style: TextStyle(
-                            fontSize: 12,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.symmetric(vertical: 2),
-                        child: Text(
-                          DateFormat().format(transactions[index].time),
-                          style: TextStyle(
-                            fontSize: 10,
-                            color: Colors.grey,
-                          ),
-                        ),
-                      )
-                    ],
-                  )
-                ],
-              ),
+                );
+              },
+              itemCount: transactions.length,
             ),
-          );
-        },
-        itemCount: transactions.length,
-      ),
     );
   }
 }
