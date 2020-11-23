@@ -29,37 +29,73 @@ class _TxNewState extends State<TxNew> {
     Navigator.of(context).pop();
   }
 
+  void startDatePicker() {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(DateTime.now().year - 1),
+      lastDate: DateTime.now(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          children: [
-            TextField(
-              decoration: InputDecoration(labelText: 'Title'),
-              controller: titleController,
-              onSubmitted: (_) => inputTx,
+      padding: EdgeInsets.all(16),
+      child: Column(
+        children: [
+          TextField(
+            decoration: InputDecoration(labelText: 'Title'),
+            controller: titleController,
+            onSubmitted: (_) => inputTx,
+          ),
+          TextField(
+            decoration: InputDecoration(labelText: 'Descriptions'),
+            controller: descController,
+            onSubmitted: (_) => inputTx,
+          ),
+          TextField(
+            decoration: InputDecoration(labelText: 'Amount'),
+            controller: amountController,
+            keyboardType: TextInputType.number,
+            onSubmitted: (_) => inputTx,
+          ),
+          Container(
+            padding: EdgeInsets.all(16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      'No date chosen',
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.date_range),
+                      onPressed: startDatePicker,
+                    )
+                  ],
+                ),
+                RaisedButton(
+                  onPressed: inputTx,
+                  color: Theme.of(context).primaryColor,
+                  child: Text(
+                    'SUBMIT',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                )
+              ],
             ),
-            TextField(
-              decoration: InputDecoration(labelText: 'Descriptions'),
-              controller: descController,
-              onSubmitted: (_) => inputTx,
-            ),
-            TextField(
-              decoration: InputDecoration(labelText: 'Amount'),
-              controller: amountController,
-              keyboardType: TextInputType.number,
-              onSubmitted: (_) => inputTx,
-            ),
-            FlatButton(
-              onPressed: inputTx,
-              child: Text(
-                'Add new',
-                style: TextStyle(color: Colors.red),
-              ),
-            )
-          ],
-        ),
-      )
+          )
+        ],
+      ),
+    );
   }
 }
