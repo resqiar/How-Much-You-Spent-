@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class TxNew extends StatefulWidget {
   // hold a given data
@@ -16,6 +17,9 @@ class _TxNewState extends State<TxNew> {
 
   final amountController = TextEditingController();
 
+  // DateTime the user will besaved here
+  DateTime pickedDateTime;
+
   void inputTx() {
     final titleInput = titleController.text;
     final descInput = descController.text;
@@ -23,7 +27,7 @@ class _TxNewState extends State<TxNew> {
 
     if (titleInput.isEmpty || descInput.isEmpty || amountInput <= 0) return;
 
-    widget.addTx(titleInput, descInput, amountInput);
+    widget.addTx(titleInput, descInput, amountInput, pickedDateTime);
 
     // close automatically after user input the data
     Navigator.of(context).pop();
@@ -35,7 +39,13 @@ class _TxNewState extends State<TxNew> {
       initialDate: DateTime.now(),
       firstDate: DateTime(DateTime.now().year - 1),
       lastDate: DateTime.now(),
-    );
+    ).then((value) {
+      if (value == null) return;
+
+      setState(() {
+        pickedDateTime = value;
+      });
+    });
   }
 
   @override
@@ -68,7 +78,9 @@ class _TxNewState extends State<TxNew> {
                 Row(
                   children: [
                     Text(
-                      'No date chosen',
+                      pickedDateTime == null
+                          ? 'No date chosen'
+                          : DateFormat.yMMMd().format(pickedDateTime),
                       style: TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.w500,

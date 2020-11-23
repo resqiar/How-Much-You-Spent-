@@ -39,13 +39,18 @@ class _HomePageState extends State<HomePage> {
   final List<Transaction> _txHistory = []; // initiate dummy arrays
 
   /// ! Method to save user data.
-  void _addNewTx(String txTitle, String txDesc, double txAmount) {
+  void _addNewTx(
+    String txTitle,
+    String txDesc,
+    double txAmount,
+    DateTime txDate,
+  ) {
     final newTx = Transaction(
         id: UniqueKey().toString(),
         title: txTitle,
         desc: txDesc,
         amount: txAmount,
-        time: DateTime.now());
+        time: txDate);
 
     setState(() {
       _txHistory.add(newTx);
