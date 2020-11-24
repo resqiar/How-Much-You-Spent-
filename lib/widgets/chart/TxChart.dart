@@ -25,7 +25,7 @@ class TxChart extends StatelessWidget {
       }
 
       return {'day': DateFormat.E().format(weekDays), 'amount': totalTx};
-    });
+    }).reversed.toList();
   }
 
   double get totalTX {

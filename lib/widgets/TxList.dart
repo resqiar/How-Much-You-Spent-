@@ -4,8 +4,8 @@ import 'package:intl/intl.dart';
 
 class TxList extends StatelessWidget {
   final List<Transaction> transactions;
-
-  TxList(this.transactions); // called from TxHistoryManager
+  final Function deleteTx;
+  TxList(this.transactions, this.deleteTx); // called from TxHistoryManager
 
   @override
   Widget build(BuildContext context) {
@@ -80,6 +80,10 @@ class TxList extends StatelessWidget {
                               ),
                             )
                           ],
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.delete),
+                          onPressed: () => deleteTx(transactions[index].id),
                         )
                       ],
                     ),

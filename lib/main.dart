@@ -66,6 +66,13 @@ class _HomePageState extends State<HomePage> {
     }).toList();
   }
 
+  //! Delete Tx
+  void deleteTx(String id) {
+    setState(() {
+      _txHistory.removeWhere((element) => element.id == id);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,7 +90,10 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: <Widget>[
               TxChart(_recentTxGetter),
-              TxList(_txHistory), // Manager to maintain History widget
+              TxList(
+                _txHistory,
+                deleteTx,
+              ), // Manager to maintain History widget
             ],
           ),
         ));
