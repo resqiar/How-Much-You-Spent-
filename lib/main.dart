@@ -90,6 +90,16 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: <Widget>[
               TxChart(_recentTxGetter),
+              SizedBox(height: 8),
+              Text(
+                "Transaction's History",
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey,
+                ),
+                textAlign: TextAlign.start,
+              ),
+              SizedBox(height: 8),
               TxList(
                 _txHistory,
                 deleteTx,

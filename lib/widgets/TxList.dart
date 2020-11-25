@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:focused_menu/focused_menu.dart';
+import 'package:focused_menu/modals.dart';
 import 'package:how_much_you_spent_app/models/Transaction.dart';
 import 'package:intl/intl.dart';
 
@@ -30,62 +32,89 @@ class TxList extends StatelessWidget {
             )
           : ListView.builder(
               itemBuilder: (context, index) {
-                return Card(
-                  elevation: 4,
-                  // card
-                  child: Container(
-                    padding: EdgeInsets.all(8),
-                    child: Row(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.all(12),
-                          child: Text(
-                            '\$${transactions[index].amount.toStringAsFixed(2)}',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Theme.of(context)
-                                  .primaryColor, // this color will change later dynamically
+                return FocusedMenuHolder(
+                  onPressed: () {},
+                  menuItems: <FocusedMenuItem>[
+                    FocusedMenuItem(
+                      title: Text(
+                        "Edit",
+                      ),
+                      trailingIcon: Icon(Icons.edit_outlined),
+                      onPressed: () {},
+                    ),
+                    FocusedMenuItem(
+                      title: Text(
+                        "Pin",
+                      ),
+                      trailingIcon: Icon(Icons.push_pin_outlined),
+                      onPressed: () => {},
+                    ),
+                    FocusedMenuItem(
+                      title: Text(
+                        "Delete",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      trailingIcon: Icon(
+                        Icons.delete_outline,
+                        color: Colors.white,
+                      ),
+                      backgroundColor: Colors.redAccent,
+                      onPressed: () => deleteTx(transactions[index].id),
+                    ),
+                  ],
+                  child: Card(
+                    elevation: 4,
+                    // card
+                    child: Container(
+                      padding: EdgeInsets.all(8),
+                      child: Row(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.all(12),
+                            child: Text(
+                              '\$${transactions[index].amount.toStringAsFixed(2)}',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Theme.of(context)
+                                    .primaryColor, // this color will change later dynamically
+                              ),
                             ),
                           ),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              child: Text(
-                                transactions[index].title,
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                child: Text(
+                                  transactions[index].title,
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Container(
-                              child: Text(
-                                transactions[index].desc,
-                                style: TextStyle(
-                                  fontSize: 12,
+                              Container(
+                                child: Text(
+                                  transactions[index].desc,
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.symmetric(vertical: 2),
-                              child: Text(
-                                DateFormat().format(transactions[index].time),
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  color: Colors.grey,
+                              Container(
+                                padding: EdgeInsets.symmetric(vertical: 2),
+                                child: Text(
+                                  DateFormat().format(transactions[index].time),
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: Colors.grey,
+                                  ),
                                 ),
-                              ),
-                            )
-                          ],
-                        ),
-                        IconButton(
-                          icon: Icon(Icons.delete),
-                          onPressed: () => deleteTx(transactions[index].id),
-                        )
-                      ],
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 );
