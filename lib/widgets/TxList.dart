@@ -12,7 +12,7 @@ class TxList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height / 2,
+      height: MediaQuery.of(context).size.height * 0.6,
       width: double.infinity,
       child: transactions.isEmpty
           ? Column(
