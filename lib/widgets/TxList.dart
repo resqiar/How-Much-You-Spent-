@@ -70,14 +70,17 @@ class TxList extends StatelessWidget {
                       child: Row(
                         children: [
                           Container(
+                            width: MediaQuery.of(context).size.height * 0.08,
                             margin: EdgeInsets.all(12),
-                            child: Text(
-                              '\$${transactions[index].amount.toStringAsFixed(2)}',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Theme.of(context)
-                                    .primaryColor, // this color will change later dynamically
+                            child: FittedBox(
+                              child: Text(
+                                '\$${transactions[index].amount.toStringAsFixed(2)}',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Theme.of(context)
+                                      .primaryColor, // this color will change later dynamically
+                                ),
                               ),
                             ),
                           ),

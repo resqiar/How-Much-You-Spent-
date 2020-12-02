@@ -30,6 +30,12 @@ class _HomePageState extends State<HomePage> {
   void _startBottomSheet(BuildContext ctx) {
     showModalBottomSheet(
         context: ctx,
+        isScrollControlled: true,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(30),
+          topRight: Radius.circular(30),
+        )),
         builder: (_) {
           return TxNew(_addNewTx);
         });
